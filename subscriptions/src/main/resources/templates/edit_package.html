@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<title>Edit Package</title>
+</head>
+<body>
+<body class="pt-5">
+	<div class="container mx-auto mt-5 text-center">
+		<div class="card bg-light rounded w-50 mx-auto">
+			<div class="card-header">
+				<h2 th:text="'Editing: '+${package.name}"></h2>
+			</div>
+			<div class="card-body ">
+				<form method="post">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+					<input type="hidden" name="id" th:value="${package.id}">
+					<div class="form-group">
+						<label for="name">Package name</label>
+						<input class="form-control" id="name" name="name" th:value="${package.name}" required>
+					</div>
+					<div class="form-group">
+						<label for="cost">Package cost</label>
+						<input class="form-control" id="cost" name="cost" type="number" min="1" th:value="${package.cost}" required>
+					</div>
+					<p th:text="${error}" class="text-danger"></p>
+					<input type="submit" class="btn btn-success" value="Save Package">
+					<a class="btn btn-dark" th:href="'/packages/'+${package.id}+'/delete'" th:if="${package.users.size()==0}">Delete Package</a>
+				</form>
+				<a href="/packages">Go Back</a>
+			</div>
+		</div>
+	</div>
+</body>
+</body>
+</html>
